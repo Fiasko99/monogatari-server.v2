@@ -1,9 +1,41 @@
-const express = require('express')
+// @config
+require("module-alias/register")
+require('dotenv').config()
 
-const app = express();
+// @external
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+
+// @internal
+const { orm } = require('@db')
+const router = require('@router')
+const { error } = require('@middleware')
+const port = process.env.PORT
+const app = express()
+
+app.use(express.json())
+app.use(cookieParser())
+app.use(express.urlencoded({
+    extended: true,
+}))
+app.use(cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL,
+}))
+
+app.use('/api', router)
+app.use('/cdn/assets', express.static('assets'))
+app.use(error)
 
 app.get('/', (_, res) => {
-    res.send('Скоро здесь появится функционал, но это не точно')
+  res.send('В процессе')
 })
 
-app.listen(3000)
+orm.sync({alter: false, force: true}).then(async () => {
+  console.info("База данных подключена")
+  app.listen(port, () => {
+    console.info(`Сервер запущен`)
+    console.info(`Ссылка: http://localhost:${port}`)
+  })
+}).catch(e => console.error(e))
