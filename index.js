@@ -25,7 +25,7 @@ app.use(cors({
 }))
 
 app.use('/api', router)
-app.use('/cdn/assets', express.static('assets'))
+app.use('/cdn', express.static('assets'))
 app.use(error)
 
 app.get('/', (_, res) => {

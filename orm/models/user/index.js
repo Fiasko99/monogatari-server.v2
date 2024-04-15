@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
+    confirmed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   });
 
   return table;

@@ -7,8 +7,16 @@ module.exports = class ApiError extends Error {
     this.status = status;
     this.errors = errors;
   }
-
+// сделать сообщение для логов и удалить дубликаты статускодов
   static UnauthorizedError() {
+    return new ApiError(401, 'Пользователь не авторизован')
+  }
+
+  static EmptyToken() {
+    return new ApiError(401, 'Пользователь не авторизован')
+  }
+
+  static WrongToken() {
     return new ApiError(401, 'Пользователь не авторизован')
   }
 

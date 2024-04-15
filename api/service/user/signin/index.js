@@ -13,5 +13,8 @@ module.exports = async ({login, password}) => {
     throw ApiError.InputError({ message: 'Неверный пароль' })
   }
 
+  delete data.login
+  delete data.password
+
   return data
 }

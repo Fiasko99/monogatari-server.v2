@@ -1,7 +1,7 @@
 const { db } = require('@db')
 
 module.exports = async (where) => {
-  const data = db.user.findOne({where})
+  const user = await db.user.findOne({where, raw: true})
 
-  return data
+  return user
 }
