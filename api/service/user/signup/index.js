@@ -3,8 +3,8 @@ const ApiError = require('@exception')
 const bcrypt = require('bcrypt')
 
 module.exports = async (newUser) => {
-  const userExist = user.get({ login: newUser.login })
-  if (!userExist) {
+  const userExist = await user.get({ login: newUser.login })
+  if (userExist) {
     throw ApiError.AlreadyExist()
   }
 
