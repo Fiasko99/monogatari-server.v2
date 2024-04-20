@@ -5,8 +5,8 @@ const router = new Router()
 
 router.post('/signin', userMiddleware.signin, user.signin)
 router.post('/signup', userMiddleware.signup, user.signup)
+router.get('/refresh', tokenMiddleware.validateRefreshToken, user.refresh)
+router.get('/logout', tokenMiddleware.validateAccessToken, user.logout)
 router.get('/:nickname', user.get)
-router.get('/refresh', tokenMiddleware.validateAccessToken, tokenMiddleware.validateRefreshToken)
-router.get('/logout', tokenMiddleware.validateAccessToken)
 
 module.exports = router

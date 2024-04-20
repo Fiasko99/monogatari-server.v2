@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
 
     res.cookie(
       'refreshToken', 
-      refreshToken, 
+      `Bearer ${refreshToken}`,
       {maxAge: 28 * 24 * 60 * 60 * 1000, httpOnly: true}
     )
     return res.json({ accessToken })

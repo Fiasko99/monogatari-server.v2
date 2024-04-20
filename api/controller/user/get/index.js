@@ -3,7 +3,7 @@ const { user, token } = require('@api/service')
 module.exports = async (req, res, next) => {
   try {
     const tokenData = token.getTokenData(
-      req.headers, 
+      req.headers.authorization, 
       'access', 
       withErrors=false
     )

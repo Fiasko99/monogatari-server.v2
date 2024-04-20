@@ -1,16 +1,16 @@
 const jwt = require('jsonwebtoken')
 const ApiError = require('@exception')
 
-module.exports = ({ authorization }, typeToken, withErrors) => {
+module.exports = (token, typeToken, withErrors) => {
   try {
-    if (!authorization) {
+    if (!token) {
       if (withErrors) {
         throw ApiError.UnauthorizedError()
       }
       return null
     }
 
-    const accessToken = authorization.split(' ')[1];
+    const accessToken = token.split(' ')[1];
     if (!accessToken) {
       if (withErrors) {
         throw ApiError.EmptyToken()
