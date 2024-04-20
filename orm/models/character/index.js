@@ -24,12 +24,12 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
     });
 
-    // table.hasMany(models.Post, {
-    //   foreignKey: 'characterName',
-    //   as: 'posts',
-    //   onUpdate: 'CASCADE',
-    //   onDelete: 'CASCADE',
-    // });
+    table.hasMany(models.post, {
+      foreignKey: 'characterName',
+      as: 'posts',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
   }
 
   table.addHooks = function(models) {
