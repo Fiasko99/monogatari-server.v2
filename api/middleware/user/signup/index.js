@@ -22,7 +22,7 @@ module.exports = async (req, _, next) => {
     email,
   } = req.body;
 
-  !login && next(ApiError.InputError('Пустые поле логина'))
+  !login && next(ApiError.InputError('Пустое поле логина'))
   !password && next(ApiError.InputError('Пустое поле пароля'))
   !nickname && next(ApiError.InputError('Пустое поле никнейма'))
   !email && next(ApiError.InputError('Пустое поле почты'))
