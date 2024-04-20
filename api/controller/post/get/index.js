@@ -1,8 +1,8 @@
-const { character } = require('@api/service')
+const { post } = require('@api/service')
 
 module.exports = async (req, res, next) => {
   try {
-    const data = await character.create(req.body);
+    const data = await post.get(req.params)
     return res.json(data)
   } catch (e) {
     next(e)
