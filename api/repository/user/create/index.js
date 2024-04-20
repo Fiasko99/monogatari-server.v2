@@ -1,7 +1,7 @@
 const { db } = require('@db')
 
-module.exports = async (data) => {
-  const user = await db.user.create(data)
+module.exports = async (body) => {
+  const data = await db.user.create(body)
 
-  return user.toJSON()
+  return data.toJSON()
 }

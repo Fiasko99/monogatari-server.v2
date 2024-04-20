@@ -30,7 +30,7 @@ module.exports = async (where, options = {}) => {
       ]
     ]
   }
-  const user = await db.user.findOne(query)
+  const data = await db.user.findOne(query)
 
-  return user && user.toJSON()
+  return data && data.toJSON()
 }
