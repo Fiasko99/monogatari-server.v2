@@ -8,9 +8,10 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 // @internal
-const { orm } = require('@db')
+const { orm, db } = require('@db')
 const router = require('@router')
 const { error } = require('@middleware')
+const createTestData = require("./createTestData")
 const port = process.env.PORT
 const app = express()
 
@@ -34,6 +35,9 @@ app.get('/', (_, res) => {
 
 orm.sync({alter: false, force: true}).then(async () => {
   console.info("База данных подключена")
+  createTestData(db).then(() => {
+    console.log('Тестовые данные загружены')
+  })
   app.listen(port, () => {
     console.info(`Сервер запущен`)
     console.info(`Ссылка: http://localhost:${port}`)
