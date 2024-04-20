@@ -1,9 +1,6 @@
-const minLoginLength = 3
-const minPasswordLength = 5
-const minNicknameLength = 3
-
 module.exports = {
-  minLoginLength,
-  minPasswordLength,
-  minNicknameLength,
+  minLoginLength: 3,
+  minPasswordLength: 5,
+  minNicknameLength: 3,
+  minNameLength: 1,
 }
