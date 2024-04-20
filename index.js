@@ -36,7 +36,7 @@ app.get('/', (_, res) => {
 orm.sync({alter: false, force: true}).then(async () => {
   console.info("База данных подключена")
   createTestData(db).then(() => {
-    console.log('Тестовые данные загружены')
+    console.info('Тестовые данные загружены')
   })
   app.listen(port, () => {
     console.info(`Сервер запущен`)

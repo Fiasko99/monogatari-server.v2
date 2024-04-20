@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: false,
       primaryKey: true,
     },
-  });
+  })
 
   table.associate = function (models) {
     table.hasMany(models.area, {
@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'areas',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
-  };
+    })
+  }
 
-  return table;
-};
+  return table
+}

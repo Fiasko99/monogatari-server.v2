@@ -1,11 +1,11 @@
 module.exports = class ApiError extends Error {
-  status;
-  error;
+  status
+  error
 
   constructor(status, message, errors = []) {
-    super(message);
-    this.status = status;
-    this.errors = errors;
+    super(message)
+    this.status = status
+    this.errors = errors
   }
 // сделать сообщение для логов и удалить дубликаты статускодов
   static UnauthorizedError() {
@@ -29,15 +29,15 @@ module.exports = class ApiError extends Error {
   }
 
   static AlreadyExist() {
-    return new ApiError(400, 'Уже существует');
+    return new ApiError(400, 'Уже существует')
   }
 
   static InputError(message) {
-    return new ApiError(400, message);
+    return new ApiError(400, message)
   }
 
   static BadRequest(message, errors) {
-    return new ApiError(400, message, errors);
+    return new ApiError(400, message, errors)
   }
 
   static ServerError() {

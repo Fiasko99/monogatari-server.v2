@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-  });
+  })
 
   table.associate = function (models) {
     table.belongsTo(models.location, {
@@ -25,15 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       as: 'location',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
+    })
 
     table.belongsTo(models.character, {
       foreignKey: 'characterName',
       as: 'character',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
+    })
   }
 
-  return table;
-};
+  return table
+}

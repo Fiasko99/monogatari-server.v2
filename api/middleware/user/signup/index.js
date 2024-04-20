@@ -20,7 +20,7 @@ module.exports = async (req, _, next) => {
     password,
     nickname,
     email,
-  } = req.body;
+  } = req.body
 
   !login && next(ApiError.InputError('Пустое поле логина'))
   !password && next(ApiError.InputError('Пустое поле пароля'))
@@ -31,5 +31,5 @@ module.exports = async (req, _, next) => {
   nickname.length < minNicknameLength && next(ApiError.InputError(`Длина никнейма должна быть не менее ${minNicknameLength}`))
   !validateMail(email) && next(ApiError.InputError('Неверный формат почты'))
 
-  next();
-};
+  next()
+}

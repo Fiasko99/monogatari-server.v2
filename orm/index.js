@@ -9,20 +9,20 @@ const orm = new Sequelize(
     dialect: process.env.DB_DIALECT,
     port: process.env.DB_PORT,
     logging: false
-});
+})
 
 const db = {}
 
 Object.entries(models).forEach(([modelName, instanceModel]) => {
   db[modelName] = instanceModel(orm, DataTypes)
-});
+})
 
 Object.values(db).forEach(model => {
   if (model.associate) {
-    model.associate(db);
+    model.associate(db)
   }
   if (model.addHooks) {
-    model.addHooks(db);
+    model.addHooks(db)
   }
 })
 

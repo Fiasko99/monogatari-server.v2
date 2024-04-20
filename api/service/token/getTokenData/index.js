@@ -10,7 +10,7 @@ module.exports = (token, typeToken, withErrors) => {
       return null
     }
 
-    const accessToken = token.split(' ')[1];
+    const accessToken = token.split(' ')[1]
     if (!accessToken) {
       if (withErrors) {
         throw ApiError.EmptyToken()
@@ -27,7 +27,7 @@ module.exports = (token, typeToken, withErrors) => {
       process.env[typesToken[typeToken]]
     )
     
-    return userData;
+    return userData
   } catch (_) {
     if (withErrors) {
       throw ApiError.WrongToken()

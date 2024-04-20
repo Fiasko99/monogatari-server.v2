@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       allowNull: false,
     },
-  });
+  })
 
   table.associate = function (models) {
     table.belongsTo(models.user, {
@@ -22,29 +22,29 @@ module.exports = (sequelize, DataTypes) => {
       as: 'user',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
+    })
 
     table.hasMany(models.post, {
       foreignKey: 'characterName',
       as: 'posts',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
+    })
   }
 
   table.addHooks = function(models) {
     table.beforeUpdate(async (data, options) => {
-      const { userLogin, active } = data;
-      const { fields } = options;
+      const { userLogin, active } = data
+      const { fields } = options
       if (fields.includes('active') && active) {
         const character = await models.character.findOne({
           where: { userLogin, active }
-        });
-        character && character.update({ active: false });
+        })
+        character && character.update({ active: false })
       }
-      return Promise.resolve();
-    });
+      return Promise.resolve()
+    })
   }
 
-  return table;
-};
+  return table
+}

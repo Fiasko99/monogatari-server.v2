@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false,
     }
-  });
+  })
 
   table.associate = function (models) {
     table.hasMany(models.character, {
@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'characters',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-    });
-  };
+    })
+  }
 
-  return table;
-};
+  return table
+}

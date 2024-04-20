@@ -4,6 +4,6 @@ const { post: postMiddleware, token: tokenMiddleware } = require('@api/middlewar
 const router = new Router()
 
 router.post('/create', tokenMiddleware.validateAccessToken, postMiddleware.create, post.create)
-router.get('/:name', post.get)
+router.get('/:characterName', post.get)
 
 module.exports = router

@@ -2,7 +2,7 @@ const { user, token } = require('@api/service')
 
 module.exports = async (req, res, next) => {
   try {
-    const userData = await user.signin(req.body);
+    const userData = await user.signin(req.body)
     const { 
       accessToken, 
       refreshToken 
@@ -17,4 +17,4 @@ module.exports = async (req, res, next) => {
   } catch (e) {
     next(e)
   }
-};
+}
