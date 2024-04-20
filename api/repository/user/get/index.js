@@ -14,7 +14,6 @@ module.exports = async (where, options = {}) => {
   const query = {
     where,
     attributes,
-    raw: true
   }
   if (userSelf) {
     query.include = [
@@ -33,5 +32,5 @@ module.exports = async (where, options = {}) => {
   }
   const user = await db.user.findOne(query)
 
-  return user
+  return user && user.toJSON()
 }
