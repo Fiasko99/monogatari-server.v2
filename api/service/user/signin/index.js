@@ -3,7 +3,18 @@ const ApiError = require('@exception')
 const bcrypt = require('bcrypt')
 
 module.exports = async ({login, password}) => {
-  const data = await user.get({login})
+  const attributes = [
+    'nickname',  
+    'email',  
+    'createdAt',  
+    'updatedAt', 
+    'confirmed',
+    'password'
+  ]
+  const data = await user.get(
+    {login}, 
+    {attributes}
+  )
   if (!data) {
     throw ApiError.NotFound()
   }

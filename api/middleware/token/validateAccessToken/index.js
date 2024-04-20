@@ -2,20 +2,7 @@ const ApiError = require('@exception');
 const { token } = require('@api/service');
 
 module.exports = (req, res, next) => {
-  const authorizationHeader = req.headers.authorization;
-  if (!authorizationHeader) {
-      next(ApiError.UnauthorizedError())
-  }
-
-  const accessToken = authorizationHeader.split(' ')[1];
-  if (!accessToken) {
-      next(ApiError.EmptyToken())
-  }
-  
-  const userData = token.getData(accessToken, 'access');
-  if (!userData) {
-      next(ApiError.WrongToken())
-  }
+	const userData = token.getTokenData(req.headers, 'access', true)
 
   req.user = userData;
   next();

@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     const { 
       accessToken, 
       refreshToken 
-    } = token.generateTokens(userData)
+    } = token.pairGeneration(userData)
 
     res.cookie(
       'refreshToken', 

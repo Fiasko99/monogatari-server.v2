@@ -17,7 +17,7 @@ Object.entries(models).forEach(([modelName, instanceModel]) => {
   db[modelName] = instanceModel(orm, DataTypes)
 });
 
-Object.entries(db).forEach(model => {
+Object.values(db).forEach(model => {
   if (model.associate) {
     model.associate(db);
   }

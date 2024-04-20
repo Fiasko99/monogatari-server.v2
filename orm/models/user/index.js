@@ -21,9 +21,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     confirmed: {
       type: DataTypes.BOOLEAN,
+      allowNull: true,
       defaultValue: false,
     }
   });
+
+  table.associate = function (models) {
+    table.hasMany(models.character, {
+      foreignKey: 'userLogin',
+      as: 'characters',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
+  };
 
   return table;
 };
