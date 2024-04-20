@@ -1,13 +1,13 @@
-const { character } = require('@api/repository')
+const { area } = require('@api/repository')
 const ApiError = require('@exception')
 
 module.exports = async (newData) => {
-  const isExist = await character.get({ name: newData.name })
+  const isExist = await area.get({ name: newData.name })
   if (isExist) {
     throw ApiError.AlreadyExist()
   }
 
-  const data = await character.create(newData)
+  const data = await area.create(newData)
   
   return data
 }
