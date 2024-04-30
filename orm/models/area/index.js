@@ -1,28 +1,39 @@
 module.exports = (sequelize, DataTypes) => {
   const table = sequelize.define('area', {
-    regionName: {
-      type: DataTypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
-      autoIncrement: false,
-      primaryKey: true,
+      allowNull: false,
     },
+    regionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    indexes: [
+      {
+        name: 'areas_regionId_index',
+        fields: ['regionId']
+      }
+    ]
   })
 
   table.associate = function (models) {
     table.belongsTo(models.region, {
-      foreignKey: 'regionName',
+      foreignKey: 'regionId',
       as: 'region',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
 
     table.hasMany(models.location, {
-      foreignKey: 'areaName',
-      as: 'areas',
+      foreignKey: 'areaId',
+      as: 'locations',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })

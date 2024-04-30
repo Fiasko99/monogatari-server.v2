@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const ApiError = require('@exception')
 
 module.exports = (token, typeToken, withErrors) => {
-  try {
     if (!token) {
       if (withErrors) {
         throw ApiError.UnauthorizedError()
@@ -24,14 +23,14 @@ module.exports = (token, typeToken, withErrors) => {
     }
     const userData = jwt.verify(
       accessToken, 
-      process.env[typesToken[typeToken]]
+      process.env[typesToken[typeToken]],
+      (err, res) => {
+        if (err && withErrors) {
+          throw ApiError.WrongToken()
+        }
+        return res
+      }
     )
     
     return userData
-  } catch (_) {
-    if (withErrors) {
-      throw ApiError.WrongToken()
-    }
-    return null
-  }
 }

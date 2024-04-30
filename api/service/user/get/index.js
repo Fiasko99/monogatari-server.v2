@@ -1,9 +1,8 @@
 const ApiError = require('@exception')
 const { user } = require('@api/repository')
 
-module.exports = async (reqParams, tokenData) => {
-  const userSelf = reqParams.nickname === tokenData.nickname
-  const data = await user.get(reqParams, {userSelf})
+module.exports = async (reqParams) => {
+  const data = await user.get(reqParams)
   if (!data) {
     throw ApiError.NotFound()
   }

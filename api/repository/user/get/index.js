@@ -8,26 +8,16 @@ module.exports = async (where, options = {}) => {
       'createdAt',  
       'updatedAt', 
       'confirmed'
-    ], 
-    userSelf = false
+    ]
   } = options
   const query = {
     where,
     attributes,
-  }
-  if (userSelf) {
-    query.include = [
+    include: [
       {
         model: db.character,
-        as: 'characters',
+        as: 'characters'
       }
-    ]
-    query.order = [
-      [
-        {model: db.character, as: 'characters'},
-        'name',
-        'DESC'
-      ]
     ]
   }
   const data = await db.user.findOne(query)

@@ -1,17 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
   const table = sequelize.define('character', {
-    name: {
-      type: DataTypes.STRING,
-      autoIncrement: false,
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
-    userLogin: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+      allowNull: false,
+    },
+    userLogin: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   })
@@ -25,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     table.hasMany(models.post, {
-      foreignKey: 'characterName',
+      foreignKey: 'characterId',
       as: 'posts',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',

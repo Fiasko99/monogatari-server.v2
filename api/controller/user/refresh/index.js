@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
       refreshToken, 
       {maxAge: 28 * 24 * 60 * 60 * 1000, httpOnly: true}
     )
-    return res.json({ accessToken })
+    return res.json({ userData: req.user, accessToken })
   } catch (e) {
     next(e)
   }
