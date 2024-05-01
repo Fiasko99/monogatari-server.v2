@@ -6,7 +6,6 @@ require('dotenv').config()
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const history = require('connect-history-api-fallback');
 
 // @internal
 const { orm, db } = require('@db')
@@ -29,8 +28,6 @@ app.use(cors({
 app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
-app.use(history())
-app.use(express.static('dist'))
 
 orm.sync({alter: false, force: true}).then(async () => {
   console.info("База данных подключена")
