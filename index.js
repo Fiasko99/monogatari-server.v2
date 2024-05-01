@@ -29,7 +29,9 @@ app.use(cors({
 app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
-app.use(history())
+app.use(history({
+  disableDotRule: true
+}))
 app.use(express.static('dist'))
 
 orm.sync({alter: false, force: true}).then(async () => {
