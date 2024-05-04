@@ -4,7 +4,7 @@
   "description": "Форум для размещения историй о приключениях своего персонажа",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file .env.development index",
+    "start": "node --env-file .env.production index",
     "dev": "nodemon --exec \"node --env-file .env.development.local index\""
   },
   "author": "Fiasko",

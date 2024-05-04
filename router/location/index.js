@@ -4,6 +4,7 @@ const { location: locationMiddleware, token: tokenMiddleware } = require('@api/m
 const router = new Router()
 
 router.post('/create', tokenMiddleware.validateAccessToken, locationMiddleware.create, location.create)
+router.get('/active', location.active)
 router.get('/:id', location.get)
 
 module.exports = router

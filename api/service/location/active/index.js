@@ -1,8 +1,8 @@
 const ApiError = require('@exception')
-const { region } = require('@api/repository')
+const { location } = require('@api/repository')
 
 module.exports = async () => {
-  const data = await region.getFull()
+  const data = await location.getAll()
   if (!data) {
     throw ApiError.NotFound()
   }
