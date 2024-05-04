@@ -1,8 +1,10 @@
 const { token } = require('@api/service')
 
 module.exports = (req, res, next) => {
+  const refreshToken = req.cookies['refreshToken'] || ''
+  res.clearCookie('refreshToken')
   const userData = token.getTokenData(
-    `Bearer ${req.cookies['refreshToken']}`, 
+    `Bearer ${refreshToken}`, 
     'refresh', 
     true
   )

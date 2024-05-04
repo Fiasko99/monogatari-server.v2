@@ -1,36 +1,36 @@
-const jwt = require('jsonwebtoken')
-const ApiError = require('@exception')
+const jwt = require("jsonwebtoken");
+const ApiError = require("@exception");
 
 module.exports = (token, typeToken, withErrors) => {
-    if (!token) {
-      if (withErrors) {
-        throw ApiError.UnauthorizedError()
-      }
-      return null
+  console.log(token);
+  if (!token) {
+    if (withErrors) {
+      throw ApiError.UnauthorizedError();
     }
+    return null;
+  }
+  const accessToken = token.split(" ")[1];
+  if (!accessToken) {
+    if (withErrors) {
+      throw ApiError.EmptyToken();
+    }
+    return null;
+  }
 
-    const accessToken = token.split(' ')[1]
-    if (!accessToken) {
-      if (withErrors) {
-        throw ApiError.EmptyToken()
+  const typesToken = {
+    access: "JWT_ACCESS_SECRET",
+    refresh: "JWT_REFRESH_SECRET",
+  };
+  const userData = jwt.verify(
+    accessToken,
+    process.env[typesToken[typeToken]],
+    (err, res) => {
+      if (err && withErrors) {
+        throw ApiError.WrongToken();
       }
-      return null
+      return res;
     }
+  );
 
-    const typesToken = {
-      access: "JWT_ACCESS_SECRET",
-      refresh: "JWT_REFRESH_SECRET",
-    }
-    const userData = jwt.verify(
-      accessToken, 
-      process.env[typesToken[typeToken]],
-      (err, res) => {
-        if (err && withErrors) {
-          throw ApiError.WrongToken()
-        }
-        return res
-      }
-    )
-    
-    return userData
-}
+  return userData;
+};
