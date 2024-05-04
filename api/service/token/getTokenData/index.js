@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const ApiError = require("@exception");
 
 module.exports = (token, typeToken, withErrors) => {
-  console.log(token);
   if (!token) {
     if (withErrors) {
       throw ApiError.UnauthorizedError();
