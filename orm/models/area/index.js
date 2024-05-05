@@ -17,9 +17,13 @@ module.exports = (sequelize, DataTypes) => {
   {
     indexes: [
       {
+        name: 'areas_id_index',
+        fields: ['id']
+      },
+      {
         name: 'areas_regionId_index',
         fields: ['regionId']
-      }
+      },
     ]
   })
 
