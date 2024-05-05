@@ -17,6 +17,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+  },
+  {
+    indexes: [
+      {
+        name: 'posts_id_index',
+        fields: ['id']   
+      },
+      {
+        name: 'posts_characterId_index',
+        fields: ['characterId']   
+      }
+    ]
   })
 
   table.associate = function (models) {

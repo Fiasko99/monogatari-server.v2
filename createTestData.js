@@ -21,7 +21,7 @@ const createUsers = async (db) => {
 
 const createCharacters = async (db) => {
   for (let i = 1; i <= COUNTCHARACTERS; i++) {
-    const elem = { name: `character${i}`, userLogin: `user${randomInteger(COUNTUSERS)}` }
+    const elem = { name: `character${i}`, userNickname: `user${randomInteger(COUNTUSERS)}` }
     db.character.create(elem)
   }
 }

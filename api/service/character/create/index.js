@@ -2,16 +2,14 @@ const { character, user } = require('@api/repository')
 const ApiError = require('@exception')
 
 module.exports = async (newData, nickname) => {
-  console.log(newData);
-  const isExist = await character.get({ name: newData.name })
+  const isExist = await character.get(newData)
   if (isExist) {
     throw ApiError.AlreadyExist()
   }
   
-  const userData = await user.get({nickname}, {attributes: ['login']})
   const characterData = {
     ...newData,
-    userLogin: userData.login
+    userNickname: userData.login
   }
   const data = await character.create(characterData)
   
