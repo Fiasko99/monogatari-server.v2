@@ -1,20 +1,19 @@
 const { db } = require('@db')
 
 module.exports = async () => {
-  const data = await db.location.findAll(
+  const data = await db.locations.findAll(
     {
       include: [
         {
-          model: db.post,
+          model: db.posts,
           as: 'posts',
-          limit: 1,
           include: [
             {
-              model: db.character,
+              model: db.characters,
               as: 'character',
               include: [
                 {
-                  model: db.user,
+                  model: db.users,
                   attributes: ['nickname'],
                   as: 'user'
                 }
@@ -23,11 +22,11 @@ module.exports = async () => {
           ]
         },
         {
-          model: db.area,
+          model: db.areas,
           as: 'area',
           include: [
             {
-              model: db.region,
+              model: db.regions,
               as: 'region'
             }
           ]
@@ -35,6 +34,7 @@ module.exports = async () => {
       ]
     },
   )
+
 
   return data
 }

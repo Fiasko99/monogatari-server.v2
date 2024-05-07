@@ -15,12 +15,22 @@ module.exports = async (where, options = {}) => {
     attributes,
     include: [
       {
-        model: db.character,
+        model: db.characters,
         as: 'characters'
       }
-    ]
+    ],
+    order: [
+      [
+        {
+          model: db.characters, 
+          as: 'characters',
+        },
+        'createdAt', 
+        'DESC'
+      ]
+    ],
   }
-  const data = await db.user.findOne(query)
+  const data = await db.users.findOne(query)
 
   return data && data.toJSON()
 }

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const table = sequelize.define('character', {
+  const table = sequelize.define('characters', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
     userNickname: {
       type: DataTypes.STRING,
@@ -34,14 +38,14 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   table.associate = function (models) {
-    table.belongsTo(models.user, {
+    table.belongsTo(models.users, {
       foreignKey: 'userNickname',
       as: 'user',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
 
-    table.hasMany(models.post, {
+    table.hasMany(models.posts, {
       foreignKey: 'characterId',
       as: 'posts',
       onUpdate: 'CASCADE',
@@ -54,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       const { userNickname, active } = data
       const { fields } = options
       if (fields.includes('active') && active) {
-        const character = await models.character.findOne({
+        const character = await models.characters.findOne({
           where: { userNickname, active }
         })
         character && character.update({ active: false })

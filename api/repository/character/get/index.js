@@ -5,23 +5,23 @@ module.exports = async (where) => {
     where,
     include: [
       {
-        model: db.user,
+        model: db.users,
         as: 'user'
       },
       {
-        model: db.post,
+        model: db.posts,
         as: 'posts',
         include: [
           {
-            model: db.location,
+            model: db.locations,
             as: 'location',
             include: [
               {
-                model: db.area,
+                model: db.areas,
                 as: 'area',
                 include: [
                   {
-                    model: db.region,
+                    model: db.regions,
                     as: 'region'
                   }
                 ]
@@ -30,9 +30,19 @@ module.exports = async (where) => {
           }
         ]
       }
-    ]
+    ],
+    order: [
+      [
+        {
+          model: db.posts, 
+          as: 'posts',
+        },
+        'createdAt', 
+        'DESC'
+      ]
+    ],
   }
-  const data = await db.character.findOne(query)
+  const data = await db.characters.findOne(query)
 
   return data && data.toJSON()
 }

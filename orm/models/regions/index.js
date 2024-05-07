@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const table = sequelize.define('region', {
+  const table = sequelize.define('regions', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
   },
   {
@@ -20,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   table.associate = function (models) {
-    table.hasMany(models.area, {
+    table.hasMany(models.areas, {
       foreignKey: 'regionId',
       as: 'areas',
       onUpdate: 'CASCADE',

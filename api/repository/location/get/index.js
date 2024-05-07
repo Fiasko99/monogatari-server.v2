@@ -1,20 +1,20 @@
 const { db } = require('@db')
 
 module.exports = async (where) => {
-  const data = await db.location.findOne(
+  const data = await db.locations.findOne(
     {
       where,
       include: [
         {
-          model: db.post,
+          model: db.posts,
           as: 'posts',
           include: [
             {
-              model: db.character,
+              model: db.characters,
               as: 'character',
               include: [
                 {
-                  model: db.user,
+                  model: db.users,
                   attributes: ['nickname'],
                   as: 'user'
                 }
@@ -23,16 +23,23 @@ module.exports = async (where) => {
           ]
         },
         {
-          model: db.area,
+          model: db.areas,
           as: 'area',
           include: [
             {
-              model: db.region,
+              model: db.regions,
               as: 'region'
             }
           ]
         }
-      ]
+      ],
+      order: [
+        [
+          {model: db.posts, as: 'posts'}, 
+          'createdAt', 
+          'DESC'
+        ]
+      ],
     },
   )
 

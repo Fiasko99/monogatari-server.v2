@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const table = sequelize.define('user', {
+  const table = sequelize.define('users', {
     nickname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
     confirmed: {
       type: DataTypes.BOOLEAN,
@@ -39,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   table.associate = function (models) {
-    table.hasMany(models.character, {
+    table.hasMany(models.characters, {
       foreignKey: 'userNickname',
       as: 'characters',
       onUpdate: 'CASCADE',

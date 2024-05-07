@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const table = sequelize.define('post', {
+  const table = sequelize.define('posts', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -32,14 +32,14 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   table.associate = function (models) {
-    table.belongsTo(models.location, {
+    table.belongsTo(models.locations, {
       foreignKey: 'locationId',
       as: 'location',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
 
-    table.belongsTo(models.character, {
+    table.belongsTo(models.characters, {
       foreignKey: 'characterId',
       as: 'character',
       onUpdate: 'CASCADE',
