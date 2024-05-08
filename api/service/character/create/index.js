@@ -9,7 +9,7 @@ module.exports = async (newData, nickname) => {
   
   const characterData = {
     ...newData,
-    userNickname: userData.login
+    userNickname: nickname
   }
   const data = await character.create(characterData)
   
