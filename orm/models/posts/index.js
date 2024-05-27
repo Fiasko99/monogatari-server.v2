@@ -45,6 +45,31 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
+
+    table.hasMany(models.activeLocations, {
+      foreignKey: 'postId',
+      as: 'activeLocation',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    })
+  }
+
+  table.addHooks = function(models) {
+    table.afterCreate(async (data, options) => {
+      const { id, locationId } = data
+      const activeLocation = await sequelize.models.activeLocations.findOne({
+        where: { locationId }
+      })
+      if (activeLocation) {
+        await activeLocation.update({ postId: id }) 
+      } else {
+        await models.activeLocations.create({
+          locationId,
+          postId: id
+        })
+      }
+      return Promise.resolve()
+    })
   }
 
   return table

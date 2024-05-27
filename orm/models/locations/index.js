@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    areaId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
+    },
+    areaId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
@@ -42,6 +42,13 @@ module.exports = (sequelize, DataTypes) => {
     table.hasMany(models.posts, {
       foreignKey: 'locationId',
       as: 'posts',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    })
+
+    table.hasMany(models.activeLocations, {
+      foreignKey: 'locationId',
+      as: 'activeLocation',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
