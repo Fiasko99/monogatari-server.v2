@@ -6,23 +6,6 @@ module.exports = async (where) => {
       where,
       include: [
         {
-          model: db.posts,
-          as: 'posts',
-          include: [
-            {
-              model: db.characters,
-              as: 'character',
-              include: [
-                {
-                  model: db.users,
-                  attributes: ['nickname'],
-                  as: 'user'
-                }
-              ]
-            }
-          ]
-        },
-        {
           model: db.areas,
           as: 'area',
           include: [
@@ -32,14 +15,7 @@ module.exports = async (where) => {
             }
           ]
         }
-      ],
-      order: [
-        [
-          {model: db.posts, as: 'posts'}, 
-          'createdAt', 
-          'DESC'
-        ]
-      ],
+      ]
     },
   )
 
