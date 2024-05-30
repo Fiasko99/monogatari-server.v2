@@ -29,7 +29,7 @@ app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
 
-orm.sync({alter: true, force: true}).then(async () => {
+orm.sync({alter: false, force: false}).then(async () => {
   console.info("База данных подключена")
   await createTestData(db).then(() => {
     console.info('Тестовые данные загружены')

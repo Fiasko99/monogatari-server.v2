@@ -12,6 +12,11 @@ const COUNTCHARACTERS = 50
 const COUNTPOSTS = 25000
 
 const createUsers = async (db) => {
+  const count = await db.users.count({ distinct: 'nickname' })
+  if (count >= COUNTUSERS) {
+    console.log('Загрузка пользователей не требуетсся');
+    return
+  }
   const salt = parseInt(process.env.SALT)
   for (let i = 1; i <= COUNTUSERS; i++) {
     const elem = { login: `user${i}`, nickname: `user${i}`, password: bcrypt.hashSync(`user${i}`, salt), email: `${i}@mail.ru` }
@@ -21,6 +26,11 @@ const createUsers = async (db) => {
 }
 
 const createCharacters = async (db) => {
+  const count = await db.characters.count({ distinct: 'id' })
+  if (count >= COUNTCHARACTERS) {
+    console.log('Загрузка персонажей не требуетсся');
+    return
+  }
   for (let i = 1; i <= COUNTCHARACTERS; i++) {
     const elem = { name: `character${i}`, userNickname: `user${randomInteger(COUNTUSERS)}` }
     await db.characters.create(elem)
@@ -29,6 +39,11 @@ const createCharacters = async (db) => {
 }
 
 const createRegions = async (db) => {
+  const count = await db.regions.count({ distinct: 'id' })
+  if (count >= COUNTREGIONS) {
+    console.log('Загрузка регионов не требуетсся');
+    return
+  }
   for (let i = 1; i <= COUNTREGIONS; i++) {
     const elem = { 
       name: `Region${i}`, 
@@ -39,6 +54,11 @@ const createRegions = async (db) => {
 }
 
 const createAreas = async (db) => {
+  const count = await db.areas.count({ distinct: 'id' })
+  if (count >= COUNTAREAS) {
+    console.log('Загрузка областей не требуетсся');
+    return
+  }
   for (let i = 1; i <= COUNTAREAS; i++) {
     const elem = { 
       name: `Area${i}`, 
@@ -50,6 +70,11 @@ const createAreas = async (db) => {
 }
 
 const createLocations = async (db) => {
+  const count = await db.locations.count({ distinct: 'id' })
+  if (count >= COUNTLOCATIONS) {
+    console.log('Загрузка локаций не требуетсся');
+    return
+  }
   for (let i = 1; i <= COUNTLOCATIONS; i++) {
     const elem = { 
       name: `Location${i}`, 
@@ -61,6 +86,11 @@ const createLocations = async (db) => {
 }
 
 const createPosts = async (db) => {
+  const count = await db.posts.count({ distinct: 'id' })
+  if (count >= COUNTPOSTS) {
+    console.log('Загрузка постов не требуетсся');
+    return
+  }
   for (let i = 1; i <= COUNTPOSTS; i++) {
     const elem = { 
       characterId: randomInteger(COUNTCHARACTERS), 
