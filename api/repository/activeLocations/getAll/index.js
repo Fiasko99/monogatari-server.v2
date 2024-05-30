@@ -1,6 +1,7 @@
 const { db } = require('@db')
 
-module.exports = async () => {
+module.exports = async (pagination) => {
+  const { page = 1, limit = 10 } = pagination;
   const data = await db.activeLocations.findAll({
     include: [
       {
@@ -42,6 +43,8 @@ module.exports = async () => {
         'DESC'
       ]
     ],
+    offset: (page - 1) * limit,
+    limit
   })
   
   return data
