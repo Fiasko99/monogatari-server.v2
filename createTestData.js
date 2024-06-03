@@ -4,17 +4,17 @@ const randomInteger = (max) => {
   let rand = 0.5 + Math.random() * max
   return Math.round(rand)
 }
-const COUNTREGIONS = 20
+const COUNTREGIONS = 21
 const COUNTAREAS = 50
 const COUNTLOCATIONS = 250
 const COUNTUSERS = 25
 const COUNTCHARACTERS = 50
-const COUNTPOSTS = 25000
+const COUNTPOSTS = 2500
 
 const createUsers = async (db) => {
   const count = await db.users.count({ distinct: 'nickname' })
   if (count >= COUNTUSERS) {
-    console.log('Загрузка пользователей не требуетсся');
+    console.info('Загрузка пользователей не требуется');
     return
   }
   const salt = parseInt(process.env.SALT)
@@ -22,26 +22,26 @@ const createUsers = async (db) => {
     const elem = { login: `user${i}`, nickname: `user${i}`, password: bcrypt.hashSync(`user${i}`, salt), email: `${i}@mail.ru` }
     await db.users.create(elem)
   }
-  console.log('Пользователи загружены');
+  console.info('Пользователи загружены');
 }
 
 const createCharacters = async (db) => {
   const count = await db.characters.count({ distinct: 'id' })
   if (count >= COUNTCHARACTERS) {
-    console.log('Загрузка персонажей не требуетсся');
+    console.info('Загрузка персонажей не требуется');
     return
   }
   for (let i = 1; i <= COUNTCHARACTERS; i++) {
     const elem = { name: `character${i}`, userNickname: `user${randomInteger(COUNTUSERS)}` }
     await db.characters.create(elem)
   }
-  console.log('Персонажи загружены');
+  console.info('Персонажи загружены');
 }
 
 const createRegions = async (db) => {
   const count = await db.regions.count({ distinct: 'id' })
   if (count >= COUNTREGIONS) {
-    console.log('Загрузка регионов не требуетсся');
+    console.info('Загрузка регионов не требуется');
     return
   }
   for (let i = 1; i <= COUNTREGIONS; i++) {
@@ -50,13 +50,13 @@ const createRegions = async (db) => {
     }
     await db.regions.create(elem)
   }
-  console.log('Регионы загружены');
+  console.info('Регионы загружены');
 }
 
 const createAreas = async (db) => {
   const count = await db.areas.count({ distinct: 'id' })
   if (count >= COUNTAREAS) {
-    console.log('Загрузка областей не требуетсся');
+    console.info('Загрузка областей не требуется');
     return
   }
   for (let i = 1; i <= COUNTAREAS; i++) {
@@ -66,13 +66,13 @@ const createAreas = async (db) => {
     }
     await db.areas.create(elem)
   }
-  console.log('Области загружены');
+  console.info('Области загружены');
 }
 
 const createLocations = async (db) => {
   const count = await db.locations.count({ distinct: 'id' })
   if (count >= COUNTLOCATIONS) {
-    console.log('Загрузка локаций не требуетсся');
+    console.info('Загрузка локаций не требуется');
     return
   }
   for (let i = 1; i <= COUNTLOCATIONS; i++) {
@@ -82,13 +82,13 @@ const createLocations = async (db) => {
     }
     await db.locations.create(elem)
   }
-  console.log('Локации загружены');
+  console.info('Локации загружены');
 }
 
 const createPosts = async (db) => {
   const count = await db.posts.count({ distinct: 'id' })
   if (count >= COUNTPOSTS) {
-    console.log('Загрузка постов не требуетсся');
+    console.info('Загрузка постов не требуется');
     return
   }
   for (let i = 1; i <= COUNTPOSTS; i++) {
@@ -99,7 +99,7 @@ const createPosts = async (db) => {
     }
     await db.posts.create(elem)
   }
-  console.log('Посты загружены');
+  console.info('Посты загружены');
 }
 
 module.exports = async (db) => {

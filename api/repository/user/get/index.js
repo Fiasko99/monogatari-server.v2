@@ -13,22 +13,6 @@ module.exports = async (where, options = {}) => {
   const query = {
     where,
     attributes,
-    include: [
-      {
-        model: db.characters,
-        as: 'characters'
-      }
-    ],
-    order: [
-      [
-        {
-          model: db.characters, 
-          as: 'characters',
-        },
-        'createdAt', 
-        'DESC'
-      ]
-    ],
   }
   const data = await db.users.findOne(query)
 

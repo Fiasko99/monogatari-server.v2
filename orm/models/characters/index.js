@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    avatar: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: `${process.env.CDN_URL}/default/characterAvatar.svg`
+    },
     userNickname: {
       type: DataTypes.STRING,
       allowNull: false,

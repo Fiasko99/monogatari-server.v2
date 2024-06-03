@@ -15,7 +15,7 @@ const createTestData = require("./createTestData")
 const port = process.env.PORT
 const app = express()
 
-app.use(express.json())
+app.use(express.json({limit: '2mb'}))
 app.use(cookieParser())
 app.use(express.urlencoded({
     extended: true,
@@ -29,7 +29,9 @@ app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
 
-orm.sync({alter: false, force: false}).then(async () => {
+const dev = process.env.MODE === 'development' ? true : false
+
+orm.sync({alter: dev, force: dev}).then(async () => {
   console.info("База данных подключена")
   await createTestData(db).then(() => {
     console.info('Тестовые данные загружены')
