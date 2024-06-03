@@ -29,9 +29,7 @@ app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
 
-const dev = process.env.MODE === 'development' ? true : false
-
-orm.sync({alter: dev, force: dev}).then(async () => {
+orm.sync({alter: true, force: true}).then(async () => {
   console.info("База данных подключена")
   await createTestData(db).then(() => {
     console.info('Тестовые данные загружены')
