@@ -1,4 +1,5 @@
 const { db } = require('@db')
+const { userAttributes } = require('@constants/attributes')
 
 module.exports = async () => {
   const data = await db.locations.findAll(
@@ -14,7 +15,7 @@ module.exports = async () => {
               include: [
                 {
                   model: db.users,
-                  attributes: ['nickname'],
+                  attributes: userAttributes,
                   as: 'user'
                 }
               ]

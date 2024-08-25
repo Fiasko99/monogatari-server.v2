@@ -32,6 +32,7 @@
     "@router": "./router/index",
     "@exception": "./exception/index",
     "@middleware": "./middleware",
-    "@helpers": "./helpers"
+    "@helpers": "./helpers",
+    "@constants": "./constants"
   }
 }

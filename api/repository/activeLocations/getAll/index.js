@@ -1,4 +1,5 @@
 const { db } = require('@db')
+const { userAttributes } = require('@constants/attributes')
 
 module.exports = async (pagination) => {
   const { page = 1, limit = 10 } = pagination;
@@ -14,6 +15,7 @@ module.exports = async (pagination) => {
             include: [
               {
                 model: db.users,
+                attributes: userAttributes,
                 as: 'user'
               }
             ]

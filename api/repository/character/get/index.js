@@ -1,4 +1,5 @@
 const { db } = require('@db')
+const { userAttributes } = require('@constants/attributes')
 
 module.exports = async (where) => {
   const query = {
@@ -6,6 +7,7 @@ module.exports = async (where) => {
     include: [
       {
         model: db.users,
+        attributes: userAttributes,
         as: 'user'
       },
     ],
