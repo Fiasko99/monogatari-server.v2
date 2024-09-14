@@ -4,12 +4,12 @@ const randomInteger = (max) => {
   let rand = 0.5 + Math.random() * max
   return Math.round(rand)
 }
-const COUNTREGIONS = 21
-const COUNTAREAS = 50
-const COUNTLOCATIONS = 250
-const COUNTUSERS = 25
-const COUNTCHARACTERS = 50
-const COUNTPOSTS = 2500
+const COUNTREGIONS = 1
+const COUNTAREAS = 3
+const COUNTLOCATIONS = 50
+const COUNTUSERS = 1
+const COUNTCHARACTERS = 2
+const COUNTPOSTS = 100
 
 const createUsers = async (db) => {
   const count = await db.users.count({ distinct: 'nickname' })
@@ -47,6 +47,7 @@ const createRegions = async (db) => {
   for (let i = 1; i <= COUNTREGIONS; i++) {
     const elem = { 
       name: `Region${i}`, 
+      image: '/default/background.png'
     }
     await db.regions.create(elem)
   }

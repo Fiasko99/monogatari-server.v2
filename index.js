@@ -29,9 +29,11 @@ app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
 
-orm.sync({alter: true, force: true}).then(async () => {
+const development = process.env.MODE === 'development'
+
+orm.sync({alter: true, force: development}).then(async () => {
   console.info("База данных подключена")
-  await createTestData(db).then(() => {
+  development && await createTestData(db).then(() => {
     console.info('Тестовые данные загружены')
   })
   app.listen(port, () => {
