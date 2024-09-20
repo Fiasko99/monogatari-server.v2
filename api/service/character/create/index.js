@@ -49,7 +49,7 @@ module.exports = async (newData, nickname) => {
   }
   
   if (isCreateImage) {
-    characterData.avatar = `${process.env.CDN_URL}/${relativePathToImage}`
+    characterData.avatar = `/${relativePathToImage}`
   }
 
   const data = await character.create(characterData)
