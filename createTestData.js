@@ -46,8 +46,8 @@ const createRegions = async (db) => {
   }
   for (let i = 1; i <= COUNTREGIONS; i++) {
     const elem = { 
-      name: `Region${i}`, 
-      image: '/default/background.png'
+      name: `Region${i}`,
+      description: 'In the bustling heart of a vibrant trade town, sprawling across a scenic coastline, numerous docks teem with colorful trade ships bobbing gently on the azure waves. Each vessel, adorned with vibrant sails and intricate carvings, represents distant lands and cultures, their holds brimming with exotic goods. The air is filled with a cacophony of sounds: the distant chatter of merchants haggling, the rhythmic slapping of water against hulls, and the occasional laughter of children playing along the bustling piers. Along the wooden walkways, lively markets burst with activity, where stalls are draped in rich fabrics showcasing spices, silks, and fresh produce. The intoxicating aroma of fried seafood mingles with the sweet scent of ripe tropical fruits, drawing both locals and traders alike. Artisans display their crafts, from delicate pottery to gleaming metalwork, while the vibrant colors of fruits and vegetables create a feast for the eyes. The sun hangs brightly in a clear blue sky, casting warm rays that reflect off the glistening water, creating an inviting atmosphere of prosperity and camaraderie. Seagulls swoop overhead, their cries harmonizing with the lively banter of the crowds. Vendors enthusiastically call out, inviting passersby to sample their wares, while the rhythmic thrum of life pulses throughout the town, embodying a pulsating heartbeat of commerce and connection.' 
     }
     await db.regions.create(elem)
   }
@@ -63,7 +63,8 @@ const createAreas = async (db) => {
   for (let i = 1; i <= COUNTAREAS; i++) {
     const elem = { 
       name: `Area${i}`, 
-      regionId: randomInteger(COUNTREGIONS)
+      regionId: randomInteger(COUNTREGIONS),
+      description: 'In the bustling heart of a vibrant trade town, sprawling across a scenic coastline, numerous docks teem with colorful trade ships bobbing gently on the azure waves. Each vessel, adorned with vibrant sails and intricate carvings, represents distant lands and cultures, their holds brimming with exotic goods. The air is filled with a cacophony of sounds: the distant chatter of merchants haggling, the rhythmic slapping of water against hulls, and the occasional laughter of children playing along the bustling piers. Along the wooden walkways, lively markets burst with activity, where stalls are draped in rich fabrics showcasing spices, silks, and fresh produce. The intoxicating aroma of fried seafood mingles with the sweet scent of ripe tropical fruits, drawing both locals and traders alike. Artisans display their crafts, from delicate pottery to gleaming metalwork, while the vibrant colors of fruits and vegetables create a feast for the eyes. The sun hangs brightly in a clear blue sky, casting warm rays that reflect off the glistening water, creating an inviting atmosphere of prosperity and camaraderie. Seagulls swoop overhead, their cries harmonizing with the lively banter of the crowds. Vendors enthusiastically call out, inviting passersby to sample their wares, while the rhythmic thrum of life pulses throughout the town, embodying a pulsating heartbeat of commerce and connection.' 
     }
     await db.areas.create(elem)
   }
