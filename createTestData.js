@@ -5,7 +5,7 @@ const randomInteger = (max) => {
   return Math.round(rand)
 }
 const COUNTREGIONS = 1
-const COUNTAREAS = 3
+const COUNTAREAS = 5
 const COUNTLOCATIONS = 50
 const COUNTUSERS = 1
 const COUNTCHARACTERS = 2
