@@ -29,7 +29,8 @@ app.use('/api', router)
 app.use('/cdn', express.static('assets'))
 app.use(error)
 
-const development = process.env.MODE === 'development'
+// const development = process.env.MODE === 'development'
+const development = true
 
 orm.sync({alter: true, force: development}).then(async () => {
   console.info("База данных подключена")
